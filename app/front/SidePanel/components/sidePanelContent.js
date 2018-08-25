@@ -2,14 +2,18 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import Sidebar from 'react-sidebar';
-import {sidePanelManage} from 'front/SidePanel/actions/sidePanelActions';
+import {eventsCreate} from 'front/SidePanel/actions/sidePanelActions';
 import {EventsList} from 'front/SidePanel';
 
 class SidePanelContent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {event: {}};
+  }
+  
+  save = () => {
+    this.props.eventsCreate({event});
+    /*this.setState({event: {}});*/
   }
 
   render() {
@@ -31,7 +35,7 @@ class SidePanelContent extends Component {
               <textarea className="form-control" rows="3" />
             </div>
 
-            <button type="submit" className="btn btn-primary">Registrar</button>
+            <button type="button" className="btn btn-primary" onClick={() => {this.save()}}>Registrar</button>
           </form>
         </div>
       </div>
@@ -44,16 +48,13 @@ SidePanelContent.propTypes = {
   position: PropTypes.object
 };
 
-/*
 function mapStateToProps({maps}) {
   const {position} = maps;
-
   return {position: position.toJS()};
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({sidePanelManage}, dispatch);
+  return bindActionCreators({eventsCreate}, dispatch);
 }
-*/
 
-export default SidePanelContent;
+export default connect(mapStateToProps, mapDispatchToProps)(SidePanelContent);

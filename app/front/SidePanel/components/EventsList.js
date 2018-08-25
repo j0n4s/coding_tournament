@@ -32,7 +32,7 @@ class EventsList extends Component {
           {this.state.list.map((item, index) => 
             <li key={index}>
               <a 
-                className={item.activate ? 'activate': ''} 
+                className={item.activate ? 'activate' : ''} 
                 onClick={() => this.activated(index)}>
                 <i className={`fa ${item.icon}`}></i>{item.name}
               </a>

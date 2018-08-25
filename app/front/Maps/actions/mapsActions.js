@@ -1,8 +1,9 @@
 import * as actions from 'front/utils/abstractReducer';
 
-const checkPoint = (point = {}) => {
+const checkPoint = (position = {}) => {
   return (dispatch) => {
-    dispatch(actions.set('Maps/point', point));
+    console.log('TO DESPIACH position: ', position);
+    dispatch(actions.set('maps/position', position));
   };
 };
 
