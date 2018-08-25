@@ -8,16 +8,9 @@ import Helmet from 'react-helmet';
 import Root from './App/Root';
 import {Provider} from 'react-redux';
 
-let assets = {};
-
-function renderComponentWithRoot(Component, componentProps, initialData, user, isRedux = false) {
+function renderComponentWithRoot(Component, componentProps, initialData) {
   let componentHtml;
-
-  let initialStore = store({});
-
-  if (isRedux) {
-    initialStore = store(initialData);
-  }
+  let initialStore = store(initialData);
 
   global.window = {};
 
@@ -34,30 +27,25 @@ function renderComponentWithRoot(Component, componentProps, initialData, user, i
   const head = Helmet.rewind();
 
   let reduxData = {};
-  let data = initialData;
-
-  if (isRedux) {
-    reduxData = initialData;
-    data = {};
-  }
-
+  reduxData = initialData;
+  
   return '<!doctype html>\n' + renderToString(
-    <Root content={componentHtml} initialData={data} head={head} user={user} reduxData={reduxData} assets={assets}/>
+    <Root content={componentHtml} head={head} reduxData={reduxData}/>
   );
 }
 
-function handleRoute(res, renderProps, req) {
-  function renderPage(initialData, isRedux) {
+function handleRoute(res, renderProps) {
+  function renderPage(initialData) {
     try {
-      const wholeHtml = renderComponentWithRoot(RouterContext, renderProps, initialData, req.user, isRedux);
+      const wholeHtml = renderComponentWithRoot(RouterContext, renderProps, initialData);
       res.status(200).send(wholeHtml);
     } catch (error) {
       console.trace(error); // eslint-disable-line
     }
   }
 
-  const initialData = {user: req.user};
-  renderPage(initialData, true);
+  const initialData = {};
+  renderPage(initialData);
 }
 
 function handleRedirect(res, redirectLocation) {
@@ -66,14 +54,14 @@ function handleRedirect(res, redirectLocation) {
 
 function ServerRouter(req, res) {
   let location = req.url;
-  
+
   match({routes: Routes, location}, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {   
       handleRedirect(res, redirectLocation);
     }
 
     if (renderProps) {
-      handleRoute(res, renderProps, req);
+      handleRoute(res, renderProps);
     }
   });
 }

@@ -24,6 +24,7 @@ class Root extends Component {
     const head = this.props.head;
     
     let JS = [
+      'http://localhost:8080/manifest.js',
       'http://localhost:8080/vendor.js',
       'http://localhost:8080/main.js'
     ];

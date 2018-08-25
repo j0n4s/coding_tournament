@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 
 class Topbar extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Topbar extends Component {
     return (
       <div className="topBar">
         <ul>
-          <li>Mapa</li>
+          <li><Link to="/index">Mapa</Link></li>
         </ul>
       </div>
     );

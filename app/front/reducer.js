@@ -1,6 +1,10 @@
 import {combineReducers} from 'redux';
-import createReducer from 'front/BasicReducer';
+import abstractReducer from 'front/utils/abstractReducer';
+import maps from 'front/Maps/reducers';
+import sidePanel from 'front/sidePanel/reducers';
 
 export default combineReducers({
-  user: createReducer('auth/user', {}),
+  user: abstractReducer('auth/user', {}),
+  maps,
+  sidePanel
 });

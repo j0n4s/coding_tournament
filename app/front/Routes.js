@@ -1,13 +1,12 @@
 import React from 'react';
 import {Route} from 'react-router';
 import App from 'front/App/App';
-import Dashboard from 'front/Dashboard';
 
 const getIndexRoute = (nextState, callBack) => {
   let indexRoute = {
-    component: Dashboard,
+    component: App,
     onEnter: (nxtState, replace) => {
-      replace('/dashboard');
+      replace('/index');
     }
   };
   
@@ -16,8 +15,7 @@ const getIndexRoute = (nextState, callBack) => {
 
 const routes =
   <Route getIndexRoute={getIndexRoute}>
-    <Route path='login' component={Dashboard} />
-    <Route path='dashboard' component={Dashboard} />
+    <Route path='index' component={App}/>
   </Route>
 ;
 
