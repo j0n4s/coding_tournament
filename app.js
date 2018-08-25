@@ -19,7 +19,7 @@ app.use(express.static(path.resolve(__dirname, 'dist')));
 app.use('/public', express.static(path.resolve(__dirname, 'public')));
 
 require('./app/api/routes.js')(app);
-require('./app/client/server.js')(app);
+require('./app/front/server.js')(app);
 
 const database = require('./app/api/configs/database').development;
 const port = require('./app/api/configs/ports.js').development;

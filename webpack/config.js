@@ -21,7 +21,7 @@ module.exports = function(production) {
     context: rootPath,
     devtool: '#eval-source-map',
     entry: {
-      main: path.join(rootPath, 'app/client/index.js')
+      main: path.join(rootPath, 'app/front/index.js')
     },
     output: {
       path: path.join(rootPath, '/dist/'),
@@ -71,9 +71,7 @@ module.exports = function(production) {
           include: [
             path.join(rootPath, 'node_modules/bootstrap/dist/'),
             path.join(rootPath, 'node_modules/font-awesome/css/'),
-            path.join(rootPath, 'node_modules/react-select-plus/dist/'),
-            path.join(rootPath, 'node_modules/sweetalert/dist/'),
-            path.join(rootPath, 'node_modules/nprogress/')
+            path.join(rootPath, 'node_modules/react-select-plus/dist/')
           ]
         },
         {
@@ -84,7 +82,6 @@ module.exports = function(production) {
             path.join(rootPath, 'app'),
             path.join(rootPath, 'node_modules/react-widgets/lib/fonts/'),
             path.join(rootPath, 'node_modules/font-awesome/fonts/'),
-            path.join(rootPath, 'node_modules/react-widgets/lib/img/'),
             path.join(rootPath, 'node_modules/bootstrap/dist/fonts/')
           ]
         },
@@ -92,8 +89,7 @@ module.exports = function(production) {
           test:/\.json$/i,
           loaders: ['json-loader'],
           include: [
-            path.join(rootPath, 'app'),
-            path.join(rootPath, 'client/components/dataState.json')
+            path.join(rootPath, 'app')
           ]
         }
       ]
@@ -113,7 +109,7 @@ module.exports = function(production) {
       }),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'manifest',
-        chunks: ["main", "vendor", "nprogress"],
+        chunks: ["main", "vendor"],
         minChunks: Infinity
       }),
       assetsPluginInstance

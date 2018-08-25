@@ -8,9 +8,9 @@
     "transform-object-rest-spread",
     ['module-resolver', {
       alias: {
-        client: './app/client',
+        front: './app/front',
         shared: './app/shared',
-        server: './app/server'
+        api: './app/api'
       }
     }]
   ]

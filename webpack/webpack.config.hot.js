@@ -27,7 +27,7 @@ config.output = {
 config.entry.main = [
   'react-hot-loader/patch',
   'webpack-hot-middleware/client?path=//localhost:8080/__webpack_hmr',
-  path.join(rootPath, 'app/client/index.js')
+  path.join(rootPath, 'app/front/index.js')
 ];
 
 module.exports = config;

@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import createReducer from 'client/BasicReducer';
+import createReducer from 'front/BasicReducer';
 
 export default combineReducers({
   user: createReducer('auth/user', {}),
