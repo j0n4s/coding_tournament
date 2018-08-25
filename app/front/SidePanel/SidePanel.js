@@ -1,41 +1,43 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Sidebar from 'react-sidebar';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {sidePanelManage} from 'front/SidePanel/actions/sidePanelActions';
+import {SidePanelContent} from 'front/SidePanel';
 
 class SidePanel extends Component {
   constructor(props) {
     super(props);
-    this.state = {sidebarOpen: this.props.sidebarOpen};
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+    this.state = {};
   }
 
-  onSetSidebarOpen(open) {
-    this.setState({sidebarOpen: open});
+  onSetSidebarOpen = (open) => {
+    this.props.sidePanelManage(open);
   }
 
   render() {
-    this.props.sidePanelManage();
     return (
       <Sidebar
-        sidebar={<b>Sidebar content</b>}
-        open={this.props.sidebarOpen}
+        sidebar={<SidePanelContent />}
+        open={this.props.show}
         onSetOpen={this.onSetSidebarOpen}
-        styles={{sidebar: { background: "white" }}}
+        styles={{sidebar: {background: 'white', width: '500px'}}}
       >
-        <button onClick={() => this.onSetSidebarOpen(true)}>
-          Open sidebar
-        </button>
+        <div></div>
       </Sidebar>
     );
   }
 }
 
-function mapStateToProps({sidePanel}) {
-  const {sidebarOpen} = sidePanel;
+SidePanel.propTypes = {
+  sidePanelManage: PropTypes.func,
+  show: PropTypes.boolean
+};
 
-  return {sidebarOpen};
+function mapStateToProps({sidePanel}) {
+  const {show} = sidePanel;
+  return {show: show.get('open')};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -43,5 +45,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidePanel);
-
-/*export default SidePanel;*/

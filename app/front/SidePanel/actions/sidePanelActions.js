@@ -1,8 +1,8 @@
 import * as actions from 'front/utils/abstractReducer';
 
-const sidePanelManage = () => {
+const sidePanelManage = (open = false) => {
   return (dispatch) => {
-    dispatch(actions.set('SidePanel/sidebarOpen', false));
+    dispatch(actions.set('SidePanel/show', {open}));
   };
 };
 
