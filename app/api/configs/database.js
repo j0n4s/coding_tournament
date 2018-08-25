@@ -1,3 +1,3 @@
 export default {
-  development: 'mongodb://localhost/conding_tournament'
+  development: 'mongodb://localhost/coding_tournament'
 };
