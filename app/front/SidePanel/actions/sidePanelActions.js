@@ -8,11 +8,11 @@ const sidePanelManage = (open = false) => {
 };
 
 const eventsCreate = (event) => {
-  return () => {
-    eventsApi.create(event);
-    /*.then((createdEvent) => {
+  return (dispatch) => {
+    eventsApi.create(event)
+    .then((createdEvent) => {
       dispatch(actions.push('maps/events', createdEvent));
-    });*/
+    });
   };
 };
 

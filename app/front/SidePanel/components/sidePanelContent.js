@@ -12,8 +12,13 @@ class SidePanelContent extends Component {
   }
   
   save = () => {
-    this.props.eventsCreate({event});
-    /*this.setState({event: {}});*/
+    const event = {
+      name: this.state.name,
+      description: this.state.description,
+      position: this.props.position
+    };
+    
+    this.props.eventsCreate(event);
   }
 
   render() {
@@ -26,13 +31,18 @@ class SidePanelContent extends Component {
         <div className="col-xs-8">
           <form>
             <div className="form-group">
-              <label for="exampleFormControlTextarea1">Sitio donde te sucedio?</label>
-              <input className="form-control" rows="3" />
+              <label>Donde te sucedio?</label>
+              <input 
+                className="form-control"
+                onChange={e => this.setState({name: e.target.value})}/>
             </div>
             
             <div className="form-group">
-              <label for="exampleFormControlTextarea1">Describe aqui tu problema</label>
-              <textarea className="form-control" rows="3" />
+              <label>Cuentanos que sucedio</label>
+              <textarea 
+                className="form-control"
+                rows="3" 
+                onChange={e => this.setState({description: e.target.value})}/>
             </div>
 
             <button type="button" className="btn btn-primary" onClick={() => {this.save()}}>Registrar</button>
@@ -45,6 +55,7 @@ class SidePanelContent extends Component {
 
 SidePanelContent.propTypes = {
   sidePanelManage: PropTypes.func,
+  eventsCreate: PropTypes.func,
   position: PropTypes.object
 };
 
