@@ -2,23 +2,29 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {eventsCreate} from 'front/SidePanel/actions/sidePanelActions';
+import {eventsCreate, sidePanelManage} from 'front/SidePanel/actions/sidePanelActions';
 import {EventsList} from 'front/SidePanel';
 
 class SidePanelContent extends Component {
   constructor(props) {
     super(props);
-    this.state = {event: {}};
+    this.state = {
+      event: {}
+    };
   }
   
   save = () => {
     const event = {
       name: this.state.name,
       description: this.state.description,
-      position: this.props.position
+      position: this.props.event.position
     };
     
-    this.props.eventsCreate(event);
+    this.props.eventsCreate(event)
+    .then(() => {
+      this.setState({event: {}});
+      this.props.sidePanelManage();
+    });
   }
 
   render() {
@@ -32,20 +38,17 @@ class SidePanelContent extends Component {
           <form>
             <div className="form-group">
               <label>Donde te sucedio?</label>
-              <input 
-                className="form-control"
-                onChange={e => this.setState({name: e.target.value})}/>
+              <br />
+              {this.props.event.name ? <label>({this.props.event.name})</label> : <input className="form-control" onChange={e => this.setState({name: e.target.value})}/>}              
             </div>
             
             <div className="form-group">
               <label>Cuentanos que sucedio</label>
-              <textarea 
-                className="form-control"
-                rows="3" 
-                onChange={e => this.setState({description: e.target.value})}/>
+              <br />
+              {this.props.event.description ? <label>({this.props.event.description})</label> : <textarea className="form-control" rows="3" onChange={e => this.setState({description: e.target.value})}/>}              
             </div>
 
-            <button type="button" className="btn btn-primary" onClick={() => {this.save()}}>Registrar</button>
+            <button type="button" className="btn btn-primary" onClick={() => {this.save();}}>Registrar</button>
           </form>
         </div>
       </div>
@@ -56,16 +59,16 @@ class SidePanelContent extends Component {
 SidePanelContent.propTypes = {
   sidePanelManage: PropTypes.func,
   eventsCreate: PropTypes.func,
-  position: PropTypes.object
+  event: PropTypes.object
 };
 
 function mapStateToProps({maps}) {
-  const {position} = maps;
-  return {position: position.toJS()};
+  const {event} = maps;
+  return {event: event.toJS()};
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({eventsCreate}, dispatch);
+  return bindActionCreators({eventsCreate, sidePanelManage}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidePanelContent);

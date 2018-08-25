@@ -1,8 +1,8 @@
 import * as actions from 'front/utils/abstractReducer';
 
-const checkPoint = (position = {}) => {
+const checkPoint = (event = {}) => {
   return (dispatch) => {
-    dispatch(actions.set('maps/position', position));
+    dispatch(actions.set('maps/event', event));
   };
 };
 

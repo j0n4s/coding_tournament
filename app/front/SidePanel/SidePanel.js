@@ -32,12 +32,14 @@ class SidePanel extends Component {
 
 SidePanel.propTypes = {
   sidePanelManage: PropTypes.func,
-  show: PropTypes.boolean
+  show: PropTypes.any
 };
 
 function mapStateToProps({sidePanel}) {
   const {show} = sidePanel;
-  return {show: show.get('open')};
+  return {
+    show: show.get('open')
+  };
 }
 
 function mapDispatchToProps(dispatch) {

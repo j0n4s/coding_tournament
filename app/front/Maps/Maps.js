@@ -26,12 +26,13 @@ class Maps extends Component {
       lng: event.latLng.lng()
     };
     
+    this.props.checkPoint({position, name: '', description: ''});
     this.props.sidePanelManage(true);
-    this.props.checkPoint(position);
   }
   
-  onMarkerClick = (props, marker) => {
-    
+  onMarkerClick = ({name, description, position}) => {
+    this.props.sidePanelManage(true);
+    this.props.checkPoint({name, description, position});
   }
   
   render() {
@@ -41,8 +42,9 @@ class Maps extends Component {
           {this.props.events.map((event, index) => 
             <Marker
               key={index}
-              title={'The marker`s title will appear as a tooltip.'}
-              name={'SOMA'}
+              description={event.get('description')}
+              name={event.get('name')}
+              onClick={this.onMarkerClick}
               position={{lat: event.get('position').get('lat'), lng: event.get('position').get('lng')}} />
           )}
         </Map>

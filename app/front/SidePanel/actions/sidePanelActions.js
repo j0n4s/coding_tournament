@@ -9,7 +9,7 @@ const sidePanelManage = (open = false) => {
 
 const eventsCreate = (event) => {
   return (dispatch) => {
-    eventsApi.create(event)
+    return eventsApi.create(event)
     .then((createdEvent) => {
       dispatch(actions.push('maps/events', createdEvent));
     });
