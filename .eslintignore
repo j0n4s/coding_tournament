@@ -1,0 +1,4 @@
+/dist
+/node_modules
+/app/client/assets
+/app/server/gruntTemplates
