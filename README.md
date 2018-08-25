@@ -1,3 +1,8 @@
+Run App
+======
+"yarn start" or "npm run start"
+
+
 Introduction
 ======
 
